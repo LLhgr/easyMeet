@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         paddingTop: 20,
-
     },
     meetings: {
         width: "100%",
@@ -13,21 +12,42 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginTop: 5
     },
-    deleteMeeting: {
-        justifyContent: "center",
-        paddingLeft: 15,
-
-    },
-    descriptionMeeting: {
+    infoContent: {
         width: "75%",
         alignContent: 'flex-start',
-        backgroundColor: "#c7c7c7",
+        backgroundColor: "#f0f0f0",
         padding: 12,
         paddingHorizontal: 20,
-        borderRadius: 50,
+        borderRadius: 6,
         marginBottom: 5,
-        marginRight: 15,
-        color: "#fff",
+        marginLeft: 15,
+    },
+    descriptionTitle: {
+        fontSize: "15px",
+        color: "#303030",
+        fontWeight: "500",
+        marginBottom: 10,
+    },
+    descriptionDate: {
+        fontSize: "12px",
+        color: "#303030",
+        fontWeight: "500",
+        marginBottom: 5,
+    },
+    descriptionEmail: {
+        fontSize: "12px",
+        color: "#303030",
+        fontWeight: "500",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+    },
+    icon: {
+        marginRight: 5,
+    },
+    deleteMeeting: {
+        justifyContent: "center",
+        paddingRight: 25,
     },
     buttonNewMeeting: {
         width: 60,

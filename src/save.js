@@ -59,42 +59,19 @@ export default function Meeting({ navigation }) {
                 renderItem={(item) => {
                     return (
                         <View style={styles.meetings}>
-                            <TouchableOpacity style={styles.infoContent} onPress={() => navigation.navigate("Details", {
-                                id: item.item.id,
-                                title: item.item.title,
-                                date: item.item.date,
-                                link: item.item.link,
-                                email: item.item.email,
-                            })}>
-                                <Text
-                                    style={styles.descriptionTitle}
-                                >
-                                    {item.item.title}
-                                </Text>
-                                <Text
-                                    style={styles.descriptionDate}
-                                >
-                                    <FontAwesome
-                                        name="calendar"
-                                        size={12}
-                                        color="#F92E6A"
-                                        style={styles.icon}
-                                    ></FontAwesome>
-                                    {item.item.date}
-                                </Text>
-                                <Text
-                                    style={styles.descriptionEmail}
-                                >
-                                    <FontAwesome
-                                        name="envelope"
-                                        size={12}
-                                        color="#F92E6A"
-                                        style={styles.icon}
-                                    ></FontAwesome>
-                                    {item.item.email}
-                                </Text>
-
-                            </TouchableOpacity>
+                            <Text
+                                style={styles.descriptionMeeting}
+                                onPress={() => navigation.navigate("Details", {
+                                    id: item.item.id,
+                                    title: item.item.title,
+                                    date: item.item.date,
+                                    link: item.item.link,
+                                    email: item.item.email,
+                                })}
+                            >
+                                {item.item.title} -
+                                {item.item.link}
+                            </Text>
                             <TouchableOpacity
                                 style={styles.deleteMeeting}
                                 onPress={() => {

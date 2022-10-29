@@ -1,7 +1,5 @@
 
-import React from "react";
-import { useEffect } from "react"
-import { useState } from "react"
+import React, {useState, useEffect} from "react";
 import { SafeAreaView, Text, View, TouchableOpacity, FlatList, Button } from "react-native";
 
 import styles from "./style";

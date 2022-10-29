@@ -3,17 +3,17 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#ffffff",
         alignItems: "center",
         justifyContent: "center",
     },
     label: {
-        fontSize: "20px",
+        fontSize: 20,
         fontWeight: "bold",
         marginBottom: 15
     },
     input: {
-        backgroundColor: "none",
+        backgroundColor: "#ffffff",
         width: "80%",
         padding: 10,
         borderRadius: 10,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
     },
     buttonText: {
-        color: "#fff",
+        color: "#ffffff",
         fontWeight: "bold"
     },
 });

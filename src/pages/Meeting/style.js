@@ -3,14 +3,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#ffffff",
         paddingTop: 20,
     },
     meetings: {
         width: "100%",
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 5
+        marginTop: 5,
     },
     infoContent: {
         width: "75%",
@@ -23,19 +23,19 @@ const styles = StyleSheet.create({
         marginLeft: 15,
     },
     descriptionTitle: {
-        fontSize: "15px",
+        fontSize: 15,
         color: "#303030",
-        fontWeight: "500",
+        fontWeight: "bold",
         marginBottom: 10,
     },
     descriptionDate: {
-        fontSize: "12px",
+        fontSize: 12,
         color: "#303030",
-        fontWeight: "500",
+        fontWeight: "bold",
         marginBottom: 5,
     },
     descriptionEmail: {
-        fontSize: "12px",
+        fontSize: 12,
         color: "#303030",
         fontWeight: "500",
         overflow: "hidden",

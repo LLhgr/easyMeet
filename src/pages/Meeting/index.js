@@ -1,7 +1,5 @@
 
-import React from "react";
-import { useEffect } from "react"
-import { useState } from "react"
+import React, {useEffect, useState} from "react";
 import { SafeAreaView, Text, View, TouchableOpacity, FlatList, Button } from "react-native";
 
 import styles from "./style";
@@ -47,9 +45,12 @@ export default function Meeting({ navigation }) {
         })
     }
 
+
+
     useEffect(() => {
         getDados()
-    }, [])
+        console.log("chamado")
+    },[])
 
     return (
         <View style={styles.container}>

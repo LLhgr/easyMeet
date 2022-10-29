@@ -7,8 +7,6 @@ import styles from "./style";
 
 import { getFirestore, collection, getDocs, doc, getDoc, setDoc, addDoc } from 'firebase/firestore'
 
-import DatePicker from 'react-native-datepicker';
-
 export default function NewMeeting({ navigation }) {
 
     const [title, setTitle] = useState("");

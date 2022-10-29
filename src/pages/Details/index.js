@@ -24,7 +24,7 @@ export default function Details({ navigation, route }) {
                 value={route.params.email}
                 editable={false} selectTextOnFocus={false}
             />
-            <Text style={styles.label}>Link</Text>
+            <Text style={styles.label}>Link da reunião</Text>
             <TextInput
                 style={styles.input}
                 value={route.params.link}

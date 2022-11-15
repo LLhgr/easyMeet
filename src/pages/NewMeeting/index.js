@@ -15,14 +15,34 @@ export default function NewMeeting({ navigation }) {
     const [date, setDate] = useState("");
 
     function addMeeting() {
+        if (!AllFieldsAreFilled()) {
+            window.alert("Preencha todos os campos")
+            return
+        }
+        else {
+            addDoc(collection(database, "meetings"), {
+                title: title,
+                date: date,
+                email: email,
+                link: link,
+            })
+            navigation.navigate("Reuniões")
+        }
+    }
 
-        addDoc(collection(database, "meetings"), {
+    function AllFieldsAreFilled() {
+        let obj = {
             title: title,
-            date: date,
             email: email,
             link: link,
-        })
-        navigation.navigate("Meeting")
+            date: date,
+        }
+        for (let item in obj) {
+            if (obj[item] == null || obj[item] == "" || obj[item] == undefined) {
+                return false
+            }
+            else return true
+        }
     }
 
     return (
@@ -52,6 +72,7 @@ export default function NewMeeting({ navigation }) {
             <TextInput
                 style={styles.input}
                 placeholder="Ex: 10/01, 11/01, 12/01"
+                maxLength={20}
                 onChangeText={setDate}
                 value={date}
             />

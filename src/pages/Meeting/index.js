@@ -1,6 +1,7 @@
 
 import React, {useEffect, useState} from "react";
 import { SafeAreaView, Text, View, TouchableOpacity, FlatList, Button } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
 
 import styles from "./style";
 
@@ -32,11 +33,12 @@ export default function Meeting({ navigation }) {
         await getDocs(collecRef).then((snapshot) => {
             for (let i = 0; i < snapshot.docs.length; i++) {
                 let obj = {
+                    id: snapshot.docs[i].id,
                     title: snapshot.docs[i].data().title,
                     date: snapshot.docs[i].data().date,
                     link: snapshot.docs[i].data().link,
                     email: snapshot.docs[i].data().email,
-                    id: snapshot.docs[i].id,
+                    status: snapshot.docs[i].data().status,
                 }
                 lista.push(obj)
             }
@@ -45,22 +47,25 @@ export default function Meeting({ navigation }) {
         })
     }
 
-
-
     useEffect(() => {
         getDados()
-        console.log("chamado")
     },[])
 
     return (
         <View style={styles.container}>
+            <LinearGradient colors={['#000', '#090909']} style={styles.background}>
+                <View style={styles.logo}>
+                    <Text style={styles.logo_primaryName}>Easy</Text>
+                    <Text style={styles.logo_secondName}>Meet</Text>
+                </View>
+                
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={meeting}
                 renderItem={(item) => {
                     return (
                         <View style={styles.meetings}>
-                            <TouchableOpacity style={styles.infoContent} onPress={() => navigation.navigate("Details", {
+                            <TouchableOpacity style={styles.infoContent} onPress={() => navigation.navigate("Detalhes", {
                                 id: item.item.id,
                                 title: item.item.title,
                                 date: item.item.date,
@@ -78,7 +83,7 @@ export default function Meeting({ navigation }) {
                                     <FontAwesome
                                         name="calendar"
                                         size={12}
-                                        color="#F92E6A"
+                                        color="#fff"
                                         style={styles.icon}
                                     ></FontAwesome>
                                     {item.item.date}
@@ -89,12 +94,22 @@ export default function Meeting({ navigation }) {
                                     <FontAwesome
                                         name="envelope"
                                         size={12}
-                                        color="#F92E6A"
+                                        color="#fff"
                                         style={styles.icon}
                                     ></FontAwesome>
                                     {item.item.email}
                                 </Text>
-
+                                <Text
+                                    style={styles.descriptionStatus}
+                                >
+                                    <FontAwesome
+                                        name="circle"
+                                        size={12}
+                                        color="#fff"
+                                        style={styles.icon}
+                                    ></FontAwesome>
+                                    {item.item.status}
+                                </Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.deleteMeeting}
@@ -105,7 +120,7 @@ export default function Meeting({ navigation }) {
                                 <FontAwesome
                                     name="trash"
                                     size={20}
-                                    color="#F92E6A"
+                                    color="#FF6060"
                                 ></FontAwesome>
                             </TouchableOpacity>
                         </View>
@@ -114,10 +129,12 @@ export default function Meeting({ navigation }) {
             />
             <TouchableOpacity
                 style={styles.buttonNewMeeting}
-                onPress={() => navigation.navigate("New Meeting")}
+                onPress={() => navigation.navigate("Nova reunião")}
             >
                 <Text style={styles.iconButton}>+</Text>
             </TouchableOpacity>
+            </LinearGradient>
+            
         </View>
     )
 }

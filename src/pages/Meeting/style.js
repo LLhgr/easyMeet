@@ -3,10 +3,10 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#000",
-    },
-    background: {
-        height: "100%"
+        backgroundColor: "#101010",
+        display: 'flex',
+        justifyContent: "center",
+        alignItems: "center",
     },
     logo: {
         marginTop: 25,
@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     meetings: {
         width: "100%",
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
+        alignItems: 'center',
         marginTop: 25,
     },
     infoContent: {
@@ -40,7 +41,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 6,
         marginBottom: 5,
-        marginLeft: 15,
     },
     descriptionTitle: {
         fontSize: 15,
@@ -71,9 +71,8 @@ const styles = StyleSheet.create({
     icon: {
         marginRight: 5,
     },
-    deleteMeeting: {
-        justifyContent: "center",
-        paddingRight: 25,
+    iconAction: {
+        marginBottom: 20,
     },
     buttonNewMeeting: {
         width: 60,
@@ -82,7 +81,7 @@ const styles = StyleSheet.create({
         bottom: 30,
         right: 20,
         backgroundColor: "#B7FF60",
-        borderRadius: 10,
+        borderRadius: 50,
         alignItems: "center",
     },
     iconButton: {

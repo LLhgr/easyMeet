@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from "react";
-import { SafeAreaView, Text, View, TouchableOpacity, FlatList, Button } from "react-native";
+import { SafeAreaView, Text, View, TouchableOpacity, FlatList, Button, ActivityIndicator } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 import styles from "./style";
@@ -12,7 +12,8 @@ import { FontAwesome } from "@expo/vector-icons";
 
 
 export default function Meeting({ navigation }) {
-    const [meeting, setMeeting] = useState([])
+    const [meeting, setMeeting] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     function deleteMeeting(id) {
         const docRef = doc(database, "meetings", id);
@@ -28,6 +29,8 @@ export default function Meeting({ navigation }) {
     }
 
     async function getDados() {
+        setLoading(true)
+        setMeeting([]);
         const collecRef = collection(database, 'meetings');
         let lista = [];
         await getDocs(collecRef).then((snapshot) => {
@@ -44,6 +47,7 @@ export default function Meeting({ navigation }) {
             }
             console.log("lista:::", lista)
             setMeeting(lista)
+            setLoading(false)
         })
     }
 
@@ -51,90 +55,99 @@ export default function Meeting({ navigation }) {
         getDados()
     },[])
 
-    return (
-        <View style={styles.container}>
-            <LinearGradient colors={['#000', '#090909']} style={styles.background}>
+    if (loading) {
+        return (
+            <View style={styles.container}>
+                <ActivityIndicator size="large" color="green" />
+            </View>
+        );
+    }
+    else {
+        return (
+            <View style={styles.container}>
+
                 <View style={styles.logo}>
                     <Text style={styles.logo_primaryName}>Easy</Text>
                     <Text style={styles.logo_secondName}>Meet</Text>
                 </View>
-                
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                data={meeting}
-                renderItem={(item) => {
-                    return (
-                        <View style={styles.meetings}>
-                            <TouchableOpacity style={styles.infoContent} onPress={() => navigation.navigate("Detalhes", {
-                                id: item.item.id,
-                                title: item.item.title,
-                                date: item.item.date,
-                                link: item.item.link,
-                                email: item.item.email,
-                            })}>
-                                <Text
-                                    style={styles.descriptionTitle}
-                                >
-                                    {item.item.title}
-                                </Text>
-                                <Text
-                                    style={styles.descriptionDate}
-                                >
-                                    <FontAwesome
-                                        name="calendar"
-                                        size={12}
-                                        color="#fff"
-                                        style={styles.icon}
-                                    ></FontAwesome>
-                                    {item.item.date}
-                                </Text>
-                                <Text
-                                    style={styles.descriptionEmail}
-                                >
-                                    <FontAwesome
-                                        name="envelope"
-                                        size={12}
-                                        color="#fff"
-                                        style={styles.icon}
-                                    ></FontAwesome>
-                                    {item.item.email}
-                                </Text>
-                                <Text
-                                    style={styles.descriptionStatus}
-                                >
-                                    <FontAwesome
-                                        name="circle"
-                                        size={12}
-                                        color="#fff"
-                                        style={styles.icon}
-                                    ></FontAwesome>
-                                    {item.item.status}
-                                </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.deleteMeeting}
-                                onPress={() => {
-                                    deleteMeeting(item.item.id)
-                                }}
-                            >
-                                <FontAwesome
-                                    name="trash"
-                                    size={20}
-                                    color="#FF6060"
-                                ></FontAwesome>
-                            </TouchableOpacity>
-                        </View>
-                    )
-                }}
-            />
-            <TouchableOpacity
-                style={styles.buttonNewMeeting}
-                onPress={() => navigation.navigate("Nova reunião")}
-            >
-                <Text style={styles.iconButton}>+</Text>
-            </TouchableOpacity>
-            </LinearGradient>
-            
-        </View>
-    )
+                    
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={meeting}
+                    renderItem={(item) => {
+                        return (
+                            <View style={styles.meetings}>
+                                <TouchableOpacity style={styles.infoContent} onPress={() => navigation.navigate("Detalhes", {
+                                    id: item.item.id,
+                                    title: item.item.title,
+                                    date: item.item.date,
+                                    link: item.item.link,
+                                    email: item.item.email,
+                                })}>
+                                    <Text
+                                        style={styles.descriptionTitle}
+                                    >
+                                        {item.item.title}
+                                    </Text>
+                                    <Text
+                                        style={styles.descriptionDate}
+                                    >
+                                        <FontAwesome
+                                            name="calendar"
+                                            size={12}
+                                            color="#fff"
+                                            style={styles.icon}
+                                        ></FontAwesome>
+                                        {item.item.date}
+                                    </Text>
+                                    <Text
+                                        style={styles.descriptionEmail}
+                                    >
+                                        <FontAwesome
+                                            name="envelope"
+                                            size={12}
+                                            color="#fff"
+                                            style={styles.icon}
+                                        ></FontAwesome>
+                                        {item.item.email}
+                                    </Text>
+                                    <Text
+                                        style={styles.descriptionStatus}
+                                    >
+                                        <FontAwesome
+                                            name="circle"
+                                            size={12}
+                                            color={item.item.status == "Pendente" ? "orange" : "#B7FF60"}
+                                            style={styles.icon}
+                                        ></FontAwesome>
+                                        {item.item.status}
+                                    </Text>
+                                </TouchableOpacity>
+                                <View>
+                                    <TouchableOpacity
+                                        onPress={() => {
+
+                                            deleteMeeting(item.item.id)
+                                        }}
+                                    >
+                                        <FontAwesome
+                                            name="trash"
+                                            size={20}
+                                            color="#FF6060"
+                                        ></FontAwesome>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        )
+                    }}
+                />
+                <TouchableOpacity
+                    style={styles.buttonNewMeeting}
+                    onPress={() => navigation.navigate("Nova reunião")}
+                >
+                    <Text style={styles.iconButton}>+</Text>
+                </TouchableOpacity>          
+            </View>
+        )
+    }
 }

@@ -25,6 +25,7 @@ export default function NewMeeting({ navigation }) {
                 date: date,
                 email: email,
                 link: link,
+                status: "Pendente"
             })
             navigation.navigate("Reuniões")
         }

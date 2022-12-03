@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     meetings: {
-        width: "100%",
+        width: "100vw",
         flexDirection: "row",
         justifyContent: "space-around",
         alignItems: 'center',
@@ -67,6 +67,16 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: "#C1C1C1",
         fontWeight: "500",
+        marginBottom: 10,
+    },
+    chooseDate: {
+        borderRadius: "50px",
+        backgroundColor: "#B7FF60",
+        width: "60px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontWeight: "bold"
     },
     icon: {
         marginRight: 5,

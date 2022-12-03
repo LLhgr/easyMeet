@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, Text, View, TouchableOpacity, FlatList, Button, ActivityIndicator } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -42,6 +42,8 @@ export default function Meeting({ navigation }) {
                     link: snapshot.docs[i].data().link,
                     email: snapshot.docs[i].data().email,
                     status: snapshot.docs[i].data().status,
+                    creator: snapshot.docs[i].data().creator,
+                    chooseDate: snapshot.docs[i].data().chooseDate,
                 }
                 lista.push(obj)
             }
@@ -53,7 +55,7 @@ export default function Meeting({ navigation }) {
 
     useEffect(() => {
         getDados()
-    },[])
+    }, [])
 
     if (loading) {
         return (
@@ -70,9 +72,9 @@ export default function Meeting({ navigation }) {
                     <Text style={styles.logo_primaryName}>Easy</Text>
                     <Text style={styles.logo_secondName}>Meet</Text>
                 </View>
-                    
+
                 <FlatList
-                    showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={true}
                     data={meeting}
                     renderItem={(item) => {
                         return (
@@ -83,6 +85,7 @@ export default function Meeting({ navigation }) {
                                     date: item.item.date,
                                     link: item.item.link,
                                     email: item.item.email,
+                                    creator: item.item.creator,
                                 })}>
                                     <Text
                                         style={styles.descriptionTitle}
@@ -98,7 +101,7 @@ export default function Meeting({ navigation }) {
                                             color="#fff"
                                             style={styles.icon}
                                         ></FontAwesome>
-                                        {item.item.date}
+                                        {item.item.date.join(", ")}
                                     </Text>
                                     <Text
                                         style={styles.descriptionEmail}
@@ -109,7 +112,7 @@ export default function Meeting({ navigation }) {
                                             color="#fff"
                                             style={styles.icon}
                                         ></FontAwesome>
-                                        {item.item.email}
+                                        {item.item.email.join(", ")}
                                     </Text>
                                     <Text
                                         style={styles.descriptionStatus}
@@ -121,6 +124,9 @@ export default function Meeting({ navigation }) {
                                             style={styles.icon}
                                         ></FontAwesome>
                                         {item.item.status}
+                                    </Text>
+                                    <Text style={styles.chooseDate}>
+                                        {item.item.chooseDate}
                                     </Text>
                                 </TouchableOpacity>
                                 <View>
@@ -146,7 +152,7 @@ export default function Meeting({ navigation }) {
                     onPress={() => navigation.navigate("Nova reunião")}
                 >
                     <Text style={styles.iconButton}>+</Text>
-                </TouchableOpacity>          
+                </TouchableOpacity>
             </View>
         )
     }

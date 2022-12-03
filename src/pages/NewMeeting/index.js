@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-
+import uuid from 'react-native-uuid';
 import database from "../../config/config";
 
 import styles from "./style";
@@ -9,6 +9,7 @@ import { getFirestore, collection, getDocs, doc, getDoc, setDoc, addDoc } from '
 
 export default function NewMeeting({ navigation }) {
 
+    const [creator, setCreator] = useState("");
     const [title, setTitle] = useState("");
     const [email, setEmail] = useState("");
     const [link, setLink] = useState("");
@@ -20,13 +21,34 @@ export default function NewMeeting({ navigation }) {
             return
         }
         else {
-            addDoc(collection(database, "meetings"), {
-                title: title,
-                date: date,
-                email: email,
-                link: link,
-                status: "Pendente"
+
+            let emailListObj = []
+
+            let emailSplit = email.split(", ")
+            let dataSplit = date.split(", ")
+            let qtdParticipantes = emailSplit.length
+
+            emailSplit.forEach(item => {
+                let obj = {
+                    email_user: item,
+                    date: ""
+                }
+                emailListObj.push(obj)
             })
+
+            addDoc(collection(database, "meetings"), {
+                id: uuid.v4(),
+                creator: creator,
+                title: title,
+                date: dataSplit,
+                email: emailSplit,
+                link: link,
+                status: "Pendente",
+                qtdParticipantes: qtdParticipantes,
+                chooseDate: "--/--",
+                email_date: emailListObj,
+            })
+
             navigation.navigate("Reuniões")
         }
     }
@@ -48,7 +70,14 @@ export default function NewMeeting({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>Descrição</Text>
+            <Text style={styles.label}>Criador da reunião</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Vitor Lima"
+                onChangeText={setCreator}
+                value={creator}
+            />
+            <Text style={styles.label}>Título</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Reunião de planejamento de compras"

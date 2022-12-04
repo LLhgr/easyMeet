@@ -37,8 +37,10 @@ No canto inferior direito da tela de listagem de reuniões, aparece um botão de
 
 Dentro da página de criação, após preencher todas as informações corretamente, no qual os placeholders indicam, a reunião é criada e os e-mails disparados. Volta-se para a tela de reuniões agora no qual aparece um card com a nova reunião criada.
 
+*Apenas 3 datas podem ser inseridas, o exemplo de formatação correto é dado pelo placeholder
+
 #DETALHES DA REUNIÃO
 
-Ao clicar no card, as informações completas dessa reunião são mostradas, mas não podem ser alteradas.
+Ao clicar no card, as informações completas dessa reunião são mostradas, mas não podem serem alteradas.
   
   

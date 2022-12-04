@@ -1,6 +1,6 @@
 EasyMeet - Facilitador de agendamentos
 
-Integrantes
+▶ Integrantes
 
 200049 - ALAN SILVA FURQUIM
 200785 - JOSE GUILHERME MARTINS COSTA LIMA
@@ -10,7 +10,20 @@ Integrantes
 200313 - LUIZ HENRIQUE GOES RODRIGUES
 200327 - VITOR AUGUSTO DE LIMA SOARES
 
-Passo a passo para utilização:
+▶ Funcionamento:
+
+1. Criação uma reunião, escolhendo 3 (três) datas e quantos e-mails for desejado.
+2. Cada e-mail fornecido será acionado por um e-mail de nossa equipe, onde terá um link que o redicionará para um site onde o usuário escolherá 1 (uma) dentre as datas disponíveis e clicará em enviar.
+3. Quando todos os usuários responderem a reunião, o status mudará para "Concluído" e a data mais votada aparecerá no retângulo verde do card.
+  3.1. Caso a data escolhida for um empate entre datas, o sistema agendará uma data random entre elas.
+
+▶ Funcionalidades:
+
+1. Criação
+2. Visualização
+3. Exclusão
+
+▶ Passo a passo para utilização:
 
 #INSTALAÇÃO
 

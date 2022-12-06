@@ -15,7 +15,15 @@ export default function NewMeeting({ navigation }) {
     const [link, setLink] = useState("");
     const [date, setDate] = useState("");
 
-    function addMeeting() {
+    function callAPI(params) {
+        fetch('https://easy-meeting.azurewebsites.net/send_email', {
+            method: "POST",
+            body: JSON.stringify(params),
+            headers: { 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*', "Accept": "*/*" }
+        })
+    }
+
+    async function addMeeting() {
         if (!AllFieldsAreFilled()) {
             window.alert("Preencha todos os campos")
             return
@@ -48,6 +56,21 @@ export default function NewMeeting({ navigation }) {
                 chooseDate: "--/--",
                 email_date: emailListObj,
             })
+
+            let params = {
+                id: uuid.v4(),
+                creator: creator,
+                title: title,
+                date: dataSplit,
+                email: emailSplit,
+                link: link,
+                status: "Pendente",
+                qtdParticipantes: qtdParticipantes,
+                chooseDate: "--/--",
+                email_date: emailListObj,
+            }
+
+            await callAPI(params)
 
             navigation.navigate("Reuniões")
         }
